@@ -9,8 +9,17 @@ const Gallery = {
   // 在这里添加图片，除了 kanata-header.png
   // ========================================
   images: [
-    { src: "images/knt.jpg", caption: "" },
-    { src: "images/ph.jpg", caption: "" },
+    { src: "images/kanata-1.jpg", caption: "" },
+    { src: "images/kanata-2.jpg", caption: "" },
+    { src: "images/kanata-3.jpg", caption: "" },
+    { src: "images/kanata-4.jpg", caption: "" },
+    { src: "images/kanata-5.jpg", caption: "" },
+    { src: "images/kanata-6.jpg", caption: "" },
+    { src: "images/kanata-7.jpg", caption: "" },
+    { src: "images/kanata-8.jpg", caption: "" },
+    { src: "images/kanata-9.jpg", caption: "" },
+    { src: "images/kanata-10.jpg", caption: "" },
+    { src: "images/kanata-11.jpg", caption: "" },
   ],
 
   container: null,
