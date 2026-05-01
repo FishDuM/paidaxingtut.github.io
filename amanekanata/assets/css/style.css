@@ -449,7 +449,7 @@ body.nav-open .site-nav {
 /* Intro Section        */
 /* ==================== */
 .intro-section {
-    background: linear-gradient(180deg, var(--cream-white) 0%, var(--sky-gradient-start) 100%);
+    background: #E8F4FF;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -502,7 +502,7 @@ body.nav-open .site-nav {
 /* Article Section      */
 /* ==================== */
 .article-section {
-    background: linear-gradient(180deg, #F0F6FF 0%, #FDF8F4 100%);
+    background: #F0F6FF;
     padding: 60px 0 80px;
 }
 
