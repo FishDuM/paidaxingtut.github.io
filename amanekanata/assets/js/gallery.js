@@ -19,7 +19,6 @@ const Gallery = {
     { src: "images/kanata-08.jpg", caption: "" },
     { src: "images/kanata-09.jpg", caption: "" },
     { src: "images/kanata-10.jpg", caption: "" },
-    { src: "images/kanata-11.jpg", caption: "" },
   ],
 
   container: null,
