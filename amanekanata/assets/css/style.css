@@ -506,6 +506,14 @@ body.nav-open .site-nav {
     padding: 60px 0 80px;
 }
 
+.article-section h2 {
+    font-size: 2.2em;
+    color: var(--kanata-blue);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-bottom: 35px;
+}
+
 .article-body {
     max-width: 700px;
     margin: 0 auto;
