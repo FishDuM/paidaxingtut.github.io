@@ -7,6 +7,7 @@
 - 2026.04.25 站点正式上线
 - 2026.04.26 新增访问人次功能
 - 2026.04.26 新增网站日志弹窗
+- 2026.05.01 新增天音彼方纪念页
 
 <small>点击[此处](https://github.com/PaidaxingTuT/paidaxingtut.github.io/commits)查看详细变更记录</small>
 
