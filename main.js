@@ -67,6 +67,24 @@ const checkNav = () => {
   footer.classList.toggle("scrolled", scrolled);
 };
 
+// ========== 姹夊牎鑿滃崟 ==========
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+if (navToggle && navLinks) {
+  navToggle.addEventListener("click", () => {
+    navToggle.classList.toggle("active");
+    navLinks.classList.toggle("open");
+  });
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navToggle.classList.remove("active");
+      navLinks.classList.remove("open");
+    });
+  });
+}
+
+const isMobile = () => window.innerWidth <= 768;
+
 const sections = document.querySelectorAll("section[id]");
 const journeySection = document.getElementById("journey");
 const rocketWrapper = document.getElementById("rocketWrapper");
@@ -112,6 +130,9 @@ function goToSection(index) {
 window.addEventListener(
   "wheel",
   (e) => {
+    // 绉诲姩绔娇鐢ㄥ師鐢熸粴鍔?
+    if (isMobile()) return;
+
     const modal = document.getElementById("logModal");
     if (modal && modal.classList.contains("active")) return;
 
@@ -170,6 +191,10 @@ window.addEventListener(
 );
 
 function updateJourney() {
+  // 绉诲姩绔細鐢?IntersectionObserver 澶勭悊閲岀▼纰戞樉闅?
+  if (isMobile()) return;
+
+  // PC 绔細姘村钩鏃堕棿绾?+ 鐏
   const rect = journeySection.getBoundingClientRect();
   const sectionHeight = journeySection.offsetHeight;
   const viewportHeight = window.innerHeight;
@@ -216,14 +241,33 @@ document
   .querySelectorAll(".reveal")
   .forEach((el) => revealObserver.observe(el));
 
+// 绉诲姩绔噷绋嬬锛氬己琛岄噸缃墍鏈夋闈㈢瀹氫綅灞炴€?
+function resetMilestonesForMobile() {
+  const mobile = isMobile();
+  milestones.forEach((ms, index) => {
+    ms.classList.toggle("is-left", index % 2 === 0);
+    ms.classList.toggle("is-right", index % 2 !== 0);
+    if (mobile) {
+      ms.classList.add("visible");
+    } else {
+      ms.classList.remove("visible");
+    }
+  });
+}
+resetMilestonesForMobile();
+
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
     const id = this.getAttribute("href").slice(1);
     const target = document.getElementById(id);
     if (target) {
-      const index = Array.from(sections).indexOf(target);
-      if (index !== -1) goToSection(index);
+      if (isMobile()) {
+        target.scrollIntoView({ behavior: "smooth" });
+      } else {
+        const index = Array.from(sections).indexOf(target);
+        if (index !== -1) goToSection(index);
+      }
     }
   });
 });
@@ -235,6 +279,9 @@ window.addEventListener(
     requestAnimationFrame(() => {
       updateJourney();
       checkNav();
+
+      // 绉诲姩绔笉浣跨敤 section-based scroll
+      if (isMobile()) return;
 
       if (!isScrolling) {
         const scrollTop = window.scrollY;
@@ -271,7 +318,15 @@ window.addEventListener(
 );
 
 window.addEventListener("resize", () => {
-  requestAnimationFrame(updateJourney);
+  requestAnimationFrame(() => {
+    updateJourney();
+    resetMilestonesForMobile();
+  });
+  // 鏃嬭浆灞忓箷鏃跺叧闂彍鍗?
+  if (navToggle && navLinks) {
+    navToggle.classList.remove("active");
+    navLinks.classList.remove("open");
+  }
 });
 
 function copyQQ() {
@@ -392,3 +447,4 @@ window.onload = () => {
   show_runtime();
   fetchHitokoto();
 };
+

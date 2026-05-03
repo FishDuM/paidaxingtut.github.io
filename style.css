@@ -140,6 +140,10 @@ nav.scrolled {
   background: var(--accent);
   transition: all 0.28s;
 }
+.nav-divider,
+.nav-link-secondary {
+  display: none;
+}
 @media (hover: hover) {
   .nav-links a:hover {
     color: var(--text);
@@ -305,13 +309,19 @@ body.intro-active .site-counter {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  gap: 22px;
+  gap: clamp(8px, 1.5vw, 22px);
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .footer-links a {
   display: inline-block;
-  font-size: 0.85rem;
+  font-size: clamp(0.66rem, 1.05vw, 0.85rem);
   color: var(--text-soft);
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
 
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, color;
@@ -616,22 +626,6 @@ body.intro-active .hero-hitokoto {
   }
 }
 
-@media (max-width: 640px) {
-  .tech-inner {
-    padding: 0;
-  }
-  .tech-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .tech-card {
-    padding: 24px 12px;
-  }
-  .tech-card img {
-    width: 48px;
-    height: 48px;
-  }
-}
 
 #projects {
   height: 100vh;
@@ -1210,112 +1204,6 @@ footer.scrolled {
   background: var(--text-soft);
 }
 
-@media (max-width: 1024px) {
-  nav {
-    padding: 14px 24px;
-  }
-  nav.scrolled {
-    padding: 10px 24px;
-  }
-  .hero,
-  #tech-stack,
-  #projects,
-  #friends,
-  #contact {
-    height: 100vh;
-    padding: 60px 24px;
-  }
-  .journey-viewport {
-    padding: 0 24px;
-  }
-  .journey-track {
-    width: 90%;
-  }
-}
-@media (max-width: 640px) {
-  nav {
-    padding: 12px 16px;
-  }
-  nav.scrolled {
-    padding: 8px 16px;
-  }
-  .nav-links {
-    gap: 12px;
-  }
-  .nav-links a {
-    font-size: 0.72rem;
-  }
-  .hero,
-  #tech-stack,
-  #projects,
-  #friends,
-  #contact {
-    min-height: 100vh;
-    padding: 50px 16px;
-  }
-  .hero-name {
-    font-size: 2.6rem;
-  }
-  .hero-tags {
-    gap: 6px;
-  }
-  .hero-tag {
-    font-size: 0.72rem;
-    padding: 4px 12px;
-  }
-  .journey-viewport {
-    padding: 0 16px;
-  }
-  .journey-track {
-    width: 92%;
-  }
-  .ms-bottom {
-    width: 80px;
-  }
-  .ms-desc {
-    display: none;
-  }
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .friends-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    width: 100%;
-    height: auto;
-  }
-  .friend-card.wide {
-    grid-column: span 2;
-  }
-  .contact-list {
-    gap: 12px;
-  }
-  .contact-row {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .contact-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
-  }
-  .contact-label {
-    width: 100%;
-    min-width: auto;
-    height: 64px;
-    border-radius: 14px;
-    padding: 0 20px;
-  }
-  footer {
-    height: 50px;
-  }
-  .footer-inner {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-    padding: 0 16px;
-  }
-}
 
 .intro-overlay {
   position: fixed;
@@ -1344,4 +1232,546 @@ footer.scrolled {
   height: 100%;
   object-fit: contain;
   display: block;
+}
+
+/* ========== 汉堡菜单按钮 ========== */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  z-index: 1001;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========== 1024px 以下小屏幕适配 ========== */
+@media (max-width: 1024px) {
+  nav {
+    padding: 14px 24px;
+  }
+  nav.scrolled {
+    padding: 10px 24px;
+  }
+  .hero,
+  #tech-stack,
+  #projects,
+  #friends,
+  #contact {
+    padding: 60px 24px;
+  }
+  .journey-viewport {
+    padding: 0 24px;
+  }
+  .journey-track {
+    width: 90%;
+  }
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .friends-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .contact-label {
+    min-width: 240px;
+  }
+  .footer-inner {
+    padding: 0 24px;
+  }
+}
+
+/* ========== 768px 以下平板适配 ========== */
+@media (max-width: 768px) {
+  nav {
+    padding: 12px 20px;
+  }
+  nav.scrolled {
+    padding: 8px 20px;
+  }
+
+  /* 汉堡菜单 */
+  .nav-toggle {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 200px;
+    height: 100vh;
+    background: var(--card);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+  }
+  .nav-links.open {
+    right: 0;
+  }
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+  .nav-divider {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+    border: none;
+  }
+  .nav-link-secondary {
+    display: block;
+    font-size: 0.9rem !important;
+    color: var(--text-faint) !important;
+  }
+
+  .hero,
+  #tech-stack,
+  #projects,
+  #friends,
+  #contact {
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  /* Journey 移动端竖直时间线 — 彻底重置 */
+  #journey {
+    overflow: visible !important;
+  }
+  .journey-scroll-room {
+    height: auto !important;
+    position: static !important;
+  }
+  .journey-viewport {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    display: block !important;
+    padding: 50px 20px 40px !important;
+  }
+  .journey-header {
+    margin-bottom: 40px;
+    display: block !important;
+    text-align: center !important;
+  }
+  .journey-hint {
+    display: none !important;
+  }
+  .journey-track {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 620px !important;
+  }
+  .track-line {
+    position: absolute !important;
+    left: 50% !important;
+    top: 10% !important;
+    bottom: 10% !important;
+    width: 2px !important;
+    height: auto !important;
+    background: var(--border) !important;
+    display: block !important;
+    transform: translateX(-50%) !important;
+  }
+  .track-progress {
+    display: none !important;
+  }
+  .rocket-wrapper {
+    display: none !important;
+  }
+  .milestone {
+    position: relative !important;
+    left: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    width: calc(50% - 28px) !important;
+    display: flex !important;
+    flex: 1 1 20% !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 6px 0 !important;
+    margin: 0 !important;
+  }
+  .milestone.is-left {
+    align-self: flex-start !important;
+    text-align: right !important;
+    padding-right: 22px !important;
+  }
+  .milestone.is-right {
+    align-self: flex-end !important;
+    text-align: left !important;
+    padding-left: 22px !important;
+  }
+  .ms-dot {
+    position: absolute !important;
+    top: 50% !important;
+    right: auto !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background: var(--accent) !important;
+    border: 2px solid var(--page2-bg) !important;
+    box-shadow: 0 0 0 2px var(--border) !important;
+    z-index: 3;
+    transform: translateY(-50%) !important;
+  }
+  .milestone.is-left .ms-dot {
+    left: calc(100% + 22px) !important;
+  }
+  .milestone.is-right .ms-dot {
+    left: -34px !important;
+  }
+  .ms-top {
+    position: static !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    text-align: inherit !important;
+    white-space: normal !important;
+    margin-bottom: 4px;
+    display: block !important;
+  }
+  .ms-year {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .ms-bottom {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    text-align: inherit !important;
+    width: auto !important;
+    display: block !important;
+  }
+  .ms-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    display: block !important;
+    margin-bottom: 6px;
+  }
+  .ms-desc {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    display: block !important;
+    line-height: 1.6;
+  }
+
+  /* 技术栈 */
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tech-card {
+    padding: 24px 12px;
+  }
+  .tech-card img {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* 项目 */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .project-card {
+    padding: 28px 16px 24px;
+    min-height: 200px;
+  }
+  .project-name {
+    font-size: 1.2rem;
+  }
+
+  /* 友链 */
+  .friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .friend-card {
+    padding: 28px 12px;
+    min-height: 200px;
+  }
+
+  /* 联系：icon + label 合并为一个竖直卡片 */
+  .contact-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: calc(50% - 8px);
+    min-width: 140px;
+    max-width: 180px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 12px;
+  }
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .contact-icon {
+    background: none;
+    border: none;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+  }
+  .contact-label {
+    background: none;
+    border: none;
+    border-radius: 0;
+    min-width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+  /* Footer */
+  .footer-links-desktop {
+    display: none;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-text {
+    font-size: 0.78rem;
+    flex: none;
+  }
+  .footer-runtime {
+    flex: none;
+  }
+  #runtime_span {
+    font-size: 0.75rem;
+  }
+}
+
+/* ========== 480px 以下手机适配 ========== */
+@media (max-width: 480px) {
+  nav {
+    padding: 10px 14px;
+  }
+
+  .nav-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .hero {
+    padding: 60px 16px;
+  }
+  .hero-greeting {
+    font-size: 1rem;
+  }
+  .hero-name {
+    font-size: 2.4rem;
+  }
+  .hero-intro {
+    font-size: 0.95rem;
+  }
+  .hero-tags {
+    gap: 6px;
+  }
+  .hero-tag {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+  }
+  .hero-hitokoto {
+    margin-top: 32px;
+    padding: 0 8px;
+  }
+  .hitokoto-text {
+    font-size: 1rem;
+  }
+  .hitokoto-from {
+    font-size: 0.85rem;
+  }
+  .site-counter {
+    margin-top: 32px;
+  }
+
+  /* Journey */
+  .journey-viewport {
+    padding: 40px 16px;
+  }
+  .journey-track {
+    min-height: 560px !important;
+  }
+  .ms-title {
+    font-size: 1rem;
+  }
+  .ms-desc {
+    font-size: 0.8rem;
+  }
+
+  /* 技术栈 */
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .tech-card {
+    padding: 20px 10px;
+    gap: 10px;
+  }
+  .tech-card img {
+    width: 36px;
+    height: 36px;
+  }
+  .tech-card span {
+    font-size: 0.85rem;
+  }
+
+  /* 项目 */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .project-card {
+    padding: 24px 20px;
+    min-height: 160px;
+  }
+  .project-name {
+    font-size: 1.1rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+  }
+
+  /* 友链 */
+  .friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .friend-card {
+    padding: 20px 10px;
+    min-height: 170px;
+  }
+  .friend-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  .friend-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  .friend-avatar img.fish {
+    width: 54px;
+    height: 54px;
+  }
+  .friend-name {
+    font-size: 1rem;
+  }
+  .friend-desc {
+    font-size: 0.8rem;
+  }
+
+  /* 联系 */
+  .contact-row {
+    width: calc(50% - 7px);
+    min-width: 130px;
+    max-width: 170px;
+    padding: 24px 10px;
+    gap: 14px;
+    border-radius: 14px;
+  }
+  .contact-icon i {
+    font-size: 22px;
+  }
+  .contact-label-name {
+    font-size: 0.95rem;
+  }
+  .contact-label-value {
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  .footer-inner {
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .footer-text {
+    font-size: 0.75rem;
+  }
+  #runtime_span {
+    font-size: 0.72rem;
+  }
+
+  /* Modal */
+  .modal-content {
+    border-radius: 10px;
+  }
+  .modal-header {
+    padding: 16px 20px;
+  }
+  .modal-body {
+    padding: 20px 24px;
+  }
+  .modal-body h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ========== 触屏设备禁用 hover ========== */
+@media (hover: none) {
+  .tech-card:hover,
+  .project-card:hover,
+  .friend-card:hover,
+  .contact-row:hover .contact-icon,
+  .contact-row:hover .contact-label,
+  .contact-icon:hover,
+  .contact-label:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+  .tech-card:active,
+  .project-card:active,
+  .friend-card:active {
+    transform: scale(0.97);
+    transition-duration: 0.15s;
+  }
 }
